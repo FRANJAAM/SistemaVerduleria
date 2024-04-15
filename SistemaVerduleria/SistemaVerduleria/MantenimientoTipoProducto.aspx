@@ -50,13 +50,13 @@
                                     <asp:ListItem Text="Verduras" Value="Verduras">Verduras</asp:ListItem>
                                     <asp:ListItem Text="Frutas" Value="Frutas">Frutas</asp:ListItem>
                                     <asp:ListItem Text="Vegetales" Value="Vegetales">Vegetales</asp:ListItem>
-                                    <asp:ListItem Text="Tubérculos" Value="Tubérculos">Tubérculos</asp:ListItem>
+                                    <asp:ListItem Text="Tubérculos" Value="Tubérculos">Tubérculos (tallos o raíces)</asp:ListItem>
                                 </asp:DropDownList>
                                 <br />
                                 <br />
                             </div>
 
-                            <div class="control-label" style="font-weight: bold">Tipo de Precio</div>
+                            <div class="control-label" style="font-weight: bold">Unidades de medida por tipo de precio</div>
                             <div>
                                 <asp:DropDownList ID="ListaTipoPrecio" CssClass="CamposRedondos" runat="server" Height="25px" ClientIDMode="Static" >
                                     <asp:ListItem Text="---Seleccione una Opción---" Value="---Seleccione una Opción---">---Seleccione una Opción---</asp:ListItem>
@@ -69,14 +69,14 @@
                                 <br />
                             </div>
 
-                            <div class="control-label" style="font-weight: bold">Cantidad (Solo permite números)</div>
+                            <div class="control-label" style="font-weight: bold">Cantidad (Ingrese solo números)</div>
                             <div>
 <asp:TextBox ID="txtCantidad" runat="server" CssClass="CamposRedondos" Height="20px" onkeydown="if((event.keyCode<48 || event.keyCode>57) && (event.keyCode<96 || event.keyCode>105)) event.returnValue=false;"></asp:TextBox>
                                 <br />
                                 <br />
                             </div>
 
-                            <div class="control-label" style="font-weight: bold">Precio (Solo permite números)</div>
+                            <div class="control-label" style="font-weight: bold">Precio (Ingrese solo números)</div>
                             <div>
                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="CamposRedondos" Height="20px" onkeydown="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=188)event.returnValue=false;"></asp:TextBox>
                             </div>

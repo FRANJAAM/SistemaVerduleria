@@ -1,0 +1,58 @@
+﻿.boton {
+    color: #ffffff;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: none;
+    border-color: #ffffff;
+    background: #34a0c5;
+    border-width: 1px;
+    border-style: solid;
+    min-width: 130px;
+    white-space: nowrap;
+    margin: 10px;
+    padding: 5px 6px;
+    border-style: groove;
+    border-radius: 6px;
+    margin-left: 40%
+}
+
+    .boton:hover {
+        color: #34a0c5;
+        font-family: Arial;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        text-decoration: none;
+        border-color: #ffffff;
+        background: #2b84a1;
+        border-width: 1px;
+        border-style: solid;
+        min-width: 130px;
+        white-space: nowrap;
+        margin: 10px;
+        padding: 5px 6px;
+        border-style: groove;
+        border-radius: 6px;
+        margin-left: 40%
+    }
+
+.CamposRedondos {
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border: 1px solid #807b80;
+    font-family: Arial;
+    font-size: 13px;
+    width: 90%;
+}
+
+
+.control-label {
+    height: 20px;
+    font-size: 15px;
+    margin-bottom: 3px;
+    font-family: "Arial";
+    font-weight: normal !important;
+}

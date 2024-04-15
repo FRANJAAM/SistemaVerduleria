@@ -8,7 +8,7 @@ using BLL;
 
 namespace SistemaVerduleria
 {
-    public partial class MantenimientoTipoProducto : System.Web.UI.Page
+    public partial class MantenimientoTipoProducto : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,56 +16,51 @@ namespace SistemaVerduleria
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Variables necesarias para las alertas
-            Type cstype = this.GetType();
-            ClientScriptManager cs = Page.ClientScript;
-            string cstext = "";
-
-            //Valida que todos los campos estén completados
-            if ((!string.IsNullOrEmpty(txtNombreProducto.Text)) && (!string.IsNullOrEmpty(txtNombreProducto.Text)) &&
-                   (!string.IsNullOrEmpty(txtCantidad.Text)) && (ListaTipoPrecio.SelectedValue != "---Seleccione una Opción---") && (ListaTipoProducto.SelectedValue != "---Seleccione una Opción---"))
+            if (CamposCompletados())
             {
-                string TipoProductoTemp = ListaTipoProducto.SelectedValue.ToString();
-                string TipoPrecioTemp = ListaTipoPrecio.Text.ToString();
-                int CantidadTemp = Convert.ToInt32(txtCantidad.Text);
-                decimal PrecioTemp = Convert.ToDecimal(txtPrecio.Text);
+                string tipoProducto = ListaTipoProducto.SelectedValue.ToString();
+                string tipoPrecio = ListaTipoPrecio.Text.ToString();
+                int cantidad = Convert.ToInt32(txtCantidad.Text);
+                decimal precio = Convert.ToDecimal(txtPrecio.Text);
 
-                //Valida que el tipo de producto ya exista
-                MantenimientoTipoProductoBLL ValidaTipoProductoBLL = new MantenimientoTipoProductoBLL();
-                bool Validacion = ValidaTipoProductoBLL.ValidaExistenciaProducto(txtNombreProducto.Text);
+                MantenimientoTipoProductoBLL tipoProductoBLL = new MantenimientoTipoProductoBLL();
 
-
-                if (Validacion == true)
+                if (tipoProductoBLL.ValidaExistenciaProducto(txtNombreProducto.Text))
                 {
-                    //Actualiza el tipo de producto
-                    MantenimientoTipoProductoBLL TipoProductoBLL = new MantenimientoTipoProductoBLL();
-                    TipoProductoBLL.ActualizaTipoProducto(txtNombreProducto.Text, TipoProductoTemp, TipoPrecioTemp, CantidadTemp, PrecioTemp);
-
-                    LimpiaCampos();
-
-                    cstext = "alert('Producto Actualizado Exitosamente');";
-                    cs.RegisterStartupScript(cstype, "PopupScript", cstext, true);
-
+                    tipoProductoBLL.ActualizaTipoProducto(txtNombreProducto.Text, tipoProducto, tipoPrecio, cantidad, precio);
+                    MostrarMensaje("Producto Actualizado Exitosamente");
                 }
                 else
                 {
-                    //Registra tipo de producto nuevo
-                    MantenimientoTipoProductoBLL TipoProductoBLL = new MantenimientoTipoProductoBLL();
-                    TipoProductoBLL.InsertaTipoProducto(txtNombreProducto.Text, TipoProductoTemp, TipoPrecioTemp, CantidadTemp, PrecioTemp);
-
-                    LimpiaCampos();
-
-                    cstext = "alert('Se ha agregado correctamente un nuevo producto');";
-                    cs.RegisterStartupScript(cstype, "PopupScript", cstext, true);
+                    tipoProductoBLL.InsertaTipoProducto(txtNombreProducto.Text, tipoProducto, tipoPrecio, cantidad, precio);
+                    MostrarMensaje("Se ha agregado correctamente un nuevo producto");
                 }
-            }
-            cstext = "alert('Debe completar todos los campos para poder almacenar la información');";
-            cs.RegisterStartupScript(cstype, "PopupScript", cstext, true);
 
+                LimpiaCampos();
+            }
+            else
+            {
+                MostrarMensaje("Debe completar todos los campos para poder almacenar la información");
+            }
         }
+
+        private bool CamposCompletados()
+        {
+            return !string.IsNullOrEmpty(txtNombreProducto.Text) &&
+                   !string.IsNullOrEmpty(txtCantidad.Text) &&
+                   ListaTipoPrecio.SelectedValue != "---Seleccione una Opción---" &&
+                   ListaTipoProducto.SelectedValue != "---Seleccione una Opción---";
+        }
+
+        private void MostrarMensaje(string mensaje)
+        {
+            Type cstype = GetType();
+            ClientScriptManager cs = Page.ClientScript;
+            cs.RegisterStartupScript(cstype, "PopupScript", $"alert('{mensaje}');", true);
+        }
+
         private void LimpiaCampos()
         {
-            //limpia los campos posterior al procesamiento
             txtNombreProducto.Text = "";
             txtCantidad.Text = "";
             txtPrecio.Text = "";
